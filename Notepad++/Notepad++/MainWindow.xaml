@@ -1,0 +1,60 @@
+﻿<Window x:Class="Notepad__.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notepad__"
+        mc:Ignorable="d"
+        Title="Notepad++" Height="450" Width="800" Icon="icon.ico" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+        ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File" >
+                <MenuItem x:Name="NewButton" Header="New "  Click="NewButton_Click" />
+                <MenuItem x:Name="OpenButton" Header="_Open..."  Click="OpenButton_Click" />
+                <MenuItem x:Name="SaveButton" Header="_Save" Click="SaveButton_Click" />
+                <MenuItem x:Name="SaveAsButton" Header="_Save As..." Click="SaveAsButton_Click" />
+                <Separator />
+                <MenuItem x:Name="ExitButton" Header="_Exit" Click="ExitButton_Click" />
+            </MenuItem>
+
+            <MenuItem Header="_Search">
+                <MenuItem x:Name="FindButton" Header="_Find..." Click="FindButton_Click" />
+                <MenuItem x:Name="ReplaceButton" Header="_Replace..." Click="ReplaceButton_Click"/>
+                <MenuItem x:Name="ReplaceAllButton" Header="_Replace All..." Click="ReplaceAllButton_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="_Help">
+                <MenuItem x:Name="AboutButton" Header="_About..." Click="AboutButton_Click" />
+                <TextBlock TextWrapping="Wrap" Height="19" Width="144"><Run Text="Adresa institutionala "/><Hyperlink NavigateUri="https://student.unitbv.ro/surgeweb" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Email"/></Hyperlink></TextBlock>
+
+            </MenuItem>
+            
+        </Menu>
+
+        <TabControl Name="tabDynamic" ItemsSource="{Binding}"  Margin="0,5.4,-0.2,0">
+            <TabControl.Resources>
+                <DataTemplate x:Key="TabHeader" DataType="TabItem">
+                    <DockPanel>
+                        <Button Name="btnDelete" DockPanel.Dock="Right" Margin="5,0,0,0" Padding="0" Click="btnDelete_Click" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}">
+                            <Image Source="/deleteicon.png" Height="11" Width="11"></Image>
+                        </Button>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TabItem }, Path=Header}"/>
+                    </DockPanel>
+                </DataTemplate>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="AcceptsReturn" Value="True"></Setter>
+                    <Setter Property="TextWrapping" Value="WrapWithOverflow"></Setter>
+                    <Setter Property="MaxLines" Value="5000"></Setter>
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"></Setter>
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"></Setter>
+                </Style>
+            </TabControl.Resources>
+        </TabControl>
+
+    </DockPanel>
+
+</Window>
